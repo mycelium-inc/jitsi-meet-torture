@@ -97,9 +97,11 @@ public abstract class AbstractBaseTest<P extends Participant>
      */
     protected AbstractBaseTest()
     {
-        currentRoomName
-            = "torture" + String.valueOf((int)(Math.random()*1000000));
-        participants = null;
+        //currentRoomName
+        //    = "torture" + String.valueOf((int)(Math.random()*1000000));
+        //participants = null;
+        currentRoomName = baseTest.currentRoomName;
+        participants = baseTest.participants;
     }
 
     /**
