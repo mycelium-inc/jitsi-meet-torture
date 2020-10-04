@@ -1,5 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TortureSuite" verbose="1">
+    <test name="Mycelium">
+        <classes>
+            <class name="org.jitsi.meet.test.Mycelium" />
+        </classes>
+    </test>
     <test name="ActiveSpeakerTest">
         <classes>
             <class name="org.jitsi.meet.test.ActiveSpeakerTest" />
