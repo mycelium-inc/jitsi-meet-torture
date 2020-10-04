@@ -36,7 +36,7 @@ public class MyceliumPreJoinScreen
     private final static String JOIN_BUTTON_TEST_CLASS = "keepOn-btn join-party-btn";
 
 
-    public MyPreJoinScreen(WebParticipant participant)
+    public PreJoinScreen(WebParticipant participant)
     {
         this.participant = participant;
     }
@@ -44,7 +44,7 @@ public class MyceliumPreJoinScreen
     /**
      * Waits for pre join screen to load.
      */
-    public void MywaitForLoading()
+    public void waitForLoading()
     {
         // pre join and lobby share the same id for the UI
         this.participant.getLobbyScreen().waitForLoading();
@@ -54,7 +54,7 @@ public class MyceliumPreJoinScreen
      * The join button.
      * @return join button.
      */
-    public WebElement MygetJoinButton()
+    public WebElement getJoinButton()
     {
         return participant.getDriver().findElement(By.className(JOIN_BUTTON_TEST_CLASS));
     }
