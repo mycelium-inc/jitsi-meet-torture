@@ -25,7 +25,7 @@ public class Mycelium
         meetingUrl.appendConfig("config.requireDisplayName=true");
 
         joinFirstParticipant(meetingUrl);  // base/participants.java
-        MyPreJoinScreen preJoinScreen = getParticipant1().getPreJoinScreen(); // 
+        PreJoinScreen preJoinScreen = getParticipant1().getPreJoinScreen(); // 
 
         preJoinScreen.waitForLoading();
 
