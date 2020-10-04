@@ -42,5 +42,5 @@ public class Mycelium
         getParticipant1().hangUp();
     }
 
-
+}
 //<div id="world" tabindex="0"><canvas width="1558" height="1458" style="width: 779px; height: 729px;"></canvas></div>
