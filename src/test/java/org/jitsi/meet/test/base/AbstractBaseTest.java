@@ -100,8 +100,8 @@ public abstract class AbstractBaseTest<P extends Participant>
         //currentRoomName
         //    = "torture" + String.valueOf((int)(Math.random()*1000000));
         //participants = null;
-        currentRoomName = baseTest.currentRoomName;
-        participants = baseTest.participants;
+        currentRoomName = "crowdnumbermentrunk";
+        participants = 1;
     }
 
     /**
