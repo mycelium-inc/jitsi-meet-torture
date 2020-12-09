@@ -20,6 +20,15 @@ import org.apache.commons.lang3.*;
 import java.net.*;
 import java.util.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import javax.net.ssl.*;
+
 /**
  * Convenience class for dealing with Jitsi Meet conference URL components.
  *
@@ -29,6 +38,11 @@ import java.util.*;
 public class JitsiMeetUrl
     implements Cloneable
 {
+
+
+    private static boolean _isPartyCreated = false;
+    private static String _roomName = null;
+
     /**
      * In the example URL:
      * "https://server.com/room1?login=true#config.debug=true" it's
@@ -61,6 +75,8 @@ public class JitsiMeetUrl
      * it's "https://server.com".
      */
     private String serverUrl;
+
+    private String backendUrl;
 
     /**
      * If set, this should instruct the driver opening the page, that there is
@@ -257,6 +273,68 @@ public class JitsiMeetUrl
         return this;
     }
 
+    public JitsiMeetUrl createInstantParty()
+    {
+
+        if(JitsiMeetUrl._isPartyCreated == true){
+            this.setRoomName(JitsiMeetUrl._roomName);
+            return this;
+        }
+
+        try{
+            SSLContext sc = SSLContext.getInstance("TLS");
+            sc.init(null, new TrustManager[] { new TrustAll509TrustManager() }, new java.security.SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+            HttpsURLConnection.setDefaultHostnameVerifier( new HostnameVerifier(){
+                public boolean verify(String string,SSLSession ssls) {
+                    return true;
+                }
+            });
+
+        System.out.println(this.backendUrl);
+        URL obj = new URL(this.backendUrl + "/api/party/instant");
+		HttpURLConnection con = (HttpURLConnection)obj.openConnection();
+		con.setRequestMethod("POST");
+		con.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+		// For POST only - START
+	    con.setDoOutput(true);
+		// OutputStream os = con.getOutputStream();
+		// os.write(POST_PARAMS.getBytes());
+		// os.flush();
+		// os.close();
+		// For POST only - END
+
+		int responseCode = con.getResponseCode();
+		System.out.println("POST Response Code :: " + responseCode);
+
+		if (responseCode == HttpURLConnection.HTTP_OK) { //success
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+			// print result
+            System.out.println(response.toString());
+            String roomName = response.toString().substring(response.toString().indexOf("partyName\":\"") + 12).split("\"")[0];
+            this.setRoomName(roomName);
+            JitsiMeetUrl._roomName = this.roomName;
+            JitsiMeetUrl._isPartyCreated = true;
+		} else {
+			System.out.println("POST request not worked");
+        }
+    }
+    catch(Exception ex){
+        System.out.println(ex);
+    }
+        return this;
+    }
+
     /**
      * Sets the {@link #roomParameters} part of the conference URL.
      *
@@ -286,6 +364,18 @@ public class JitsiMeetUrl
         else
         {
             this.serverUrl = serverUrl;
+        }
+    }
+
+    public void setBackendUrl(String serverUrl)
+    {
+        if (serverUrl != null && serverUrl.endsWith("/"))
+        {
+            this.backendUrl = serverUrl.substring(0, serverUrl.length() -1);
+        }
+        else
+        {
+            this.backendUrl = serverUrl;
         }
     }
 

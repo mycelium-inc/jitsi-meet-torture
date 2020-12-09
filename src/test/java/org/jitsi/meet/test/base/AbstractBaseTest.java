@@ -235,7 +235,8 @@ public abstract class AbstractBaseTest<P extends Participant>
      */
     public JitsiMeetUrl getJitsiMeetUrl()
     {
-        return participants.getJitsiMeetUrl().setRoomName(currentRoomName);
+        return participants.getJitsiMeetUrl().createInstantParty();
+        //return participants.getJitsiMeetUrl().setRoomName(currentRoomName);
     }
 
     /**
