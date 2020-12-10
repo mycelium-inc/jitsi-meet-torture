@@ -1,6 +1,19 @@
 jitsi-meet-torture
 ==================
 
+# Running MyCelium specific tests
+## Running MaxUsers Test 
+To run stress test with given amount of bots for a given time run this command:
+
+```mvn test -D max_users_tests.max_users=4 -D org.jitsi.malleus.duration=180000 -D jitsi-meet.instance.url="https://dev.myceliuminc.net" -D jitsi-meet.instance.backend-url="https://dev-api.myceliuminc.net" -D jitsi-meet.tests.toRun="MaxUsersTest"```
+
+Note 5 parameters:
+- max_users_tests.max_users=4 maximum amount of bots
+- org.jitsi.malleus.duration=180000 amount of time bots are alive, in miliseconds
+- jitsi-meet.instance.url="https://dev.myceliuminc.net" frontend environment to run test on
+- jitsi-meet.instance.backend-url="https://dev-api.myceliuminc.net" backend environment to run test on
+- jitsi-meet.tests.toRun="MaxUsersTest" name of the test, in this case it is MaxUsersTest
+
 # Running 
 To run tests against a Jitsi-Meet instance running on `https://meet.example.com use`:
 
