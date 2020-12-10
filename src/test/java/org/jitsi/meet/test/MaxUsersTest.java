@@ -23,7 +23,10 @@ import org.jitsi.meet.test.web.*;
 import org.openqa.selenium.*;
 import org.testng.annotations.*;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.*;
+import java.util.concurrent.TimeoutException;
 
 import static org.testng.Assert.*;
 
@@ -96,9 +99,15 @@ public class MaxUsersTest
                 int lastParticipantIdx = participants.length - 1;
                 checkDialog(participants[lastParticipantIdx].getDriver());
             } 
-            catch(TimeoutException timeout)
+            catch(Exception timeout)
             {
+                
                 // There was no dialog, so we fail the test !
+
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                timeout.printStackTrace(pw);
+                TestUtils.print("Failed_: " + sw.toString());
                 failed = true;
             }
             finally

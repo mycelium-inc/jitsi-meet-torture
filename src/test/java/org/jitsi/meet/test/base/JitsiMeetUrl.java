@@ -39,10 +39,6 @@ public class JitsiMeetUrl
     implements Cloneable
 {
 
-
-    private static boolean _isPartyCreated = false;
-    private static String _roomName = null;
-
     /**
      * In the example URL:
      * "https://server.com/room1?login=true#config.debug=true" it's
@@ -276,8 +272,11 @@ public class JitsiMeetUrl
     public JitsiMeetUrl createInstantParty()
     {
 
-        if(JitsiMeetUrl._isPartyCreated == true){
-            this.setRoomName(JitsiMeetUrl._roomName);
+        if(CustomCache._isPartyCreated == true){
+            this.setRoomName(CustomCache._roomName);
+            if(this.serverUrl == null){
+                this.setServerUrl(CustomCache._serverUrl);
+            }
             return this;
         }
 
@@ -323,8 +322,9 @@ public class JitsiMeetUrl
             System.out.println(response.toString());
             String roomName = response.toString().substring(response.toString().indexOf("partyName\":\"") + 12).split("\"")[0];
             this.setRoomName(roomName);
-            JitsiMeetUrl._roomName = this.roomName;
-            JitsiMeetUrl._isPartyCreated = true;
+            CustomCache._roomName = this.roomName;
+            CustomCache._isPartyCreated = true;
+            CustomCache._serverUrl = this.serverUrl;
 		} else {
 			System.out.println("POST request not worked");
         }

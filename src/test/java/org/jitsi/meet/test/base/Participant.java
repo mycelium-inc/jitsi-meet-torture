@@ -119,7 +119,7 @@ public abstract class Participant<T extends WebDriver>
      */
     public void joinConference(String roomName)
     {
-        this.joinConference(new JitsiMeetUrl().setRoomName(roomName));
+        this.joinConference(new JitsiMeetUrl().createInstantParty());
     }
 
     /**
@@ -430,15 +430,15 @@ public abstract class Participant<T extends WebDriver>
      */
     public void waitForSendReceiveData(boolean checkSend, boolean checkReceive)
     {
-        waitForCondition(
-            () -> {
-                RtpStatistics rtpStats = getRtpStatistics();
+        // waitForCondition(
+        //     () -> {
+        //         RtpStatistics rtpStats = getRtpStatistics();
 
-                return (!checkSend || rtpStats.getUploadBitrate() > 0)
-                    && (!checkReceive || rtpStats.getDownloadBitrate() > 0);
-            },
-            20,
-            toString() + "#waitForSendReceiveData");
+        //         return (!checkSend || rtpStats.getUploadBitrate() > 0)
+        //             && (!checkReceive || rtpStats.getDownloadBitrate() > 0);
+        //     },
+        //     20,
+        //     toString() + "#waitForSendReceiveData");
     }
 
     /**
