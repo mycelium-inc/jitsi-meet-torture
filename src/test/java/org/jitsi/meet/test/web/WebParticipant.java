@@ -134,7 +134,7 @@ public class WebParticipant extends Participant<WebDriver>
         // even there is a TimeoutException the page is loaded correctly
         // and driver is operating, we just lower the page load timeout
         // default is 3 minutes and we log and skip this exception
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
         try
         {
             driver.get(conferenceUrl.toString());

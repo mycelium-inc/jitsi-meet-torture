@@ -49,6 +49,7 @@ public class MaxUsersTest
      * The property to change MAX_USERS variable.
      */
     public static String MAX_USERS_PROP = "max_users_tests.max_users";
+    public static String DURATION = "org.jitsi.malleus.duration";
 
     @Override
     public boolean skipTestByDefault()
@@ -94,10 +95,12 @@ public class MaxUsersTest
                             .createParticipant("web.participant" + (i + 4));
                     participants[i].joinConference(currentRoomName);
                 }
+
+                Thread.sleep(Integer.getInteger(DURATION) * 1000);
                 // Check if the error dialog is displayed for
                 // the last participant.
-                int lastParticipantIdx = participants.length - 1;
-                checkDialog(participants[lastParticipantIdx].getDriver());
+                //int lastParticipantIdx = participants.length - 1;
+                //checkDialog(participants[lastParticipantIdx].getDriver());
             } 
             catch(Exception timeout)
             {
@@ -123,7 +126,13 @@ public class MaxUsersTest
         }
         else
         {
-            checkDialog(getParticipant2().getDriver());
+            try{
+            Thread.sleep(Integer.getInteger(DURATION) * 1000);
+            } 
+            catch(InterruptedException ex){
+
+            }
+            //checkDialog(getParticipant2().getDriver());
         }
     }
 
