@@ -377,6 +377,7 @@ public class JitsiMeetUrl
         {
             this.backendUrl = serverUrl;
         }
+        CustomCache._backendUrl = this.backendUrl;
     }
 
     /**

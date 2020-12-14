@@ -115,6 +115,7 @@ public class MaxUsersTest
             }
             finally
             {
+                new MyCeliumBackendService().finishParty();
                 // Clean up the participants in participants array
                 Arrays.stream(participants).forEach(Participant::close);
             }
@@ -128,6 +129,8 @@ public class MaxUsersTest
         {
             try{
             Thread.sleep(Integer.getInteger(DURATION) * 1000);
+
+            new MyCeliumBackendService().finishParty();
             } 
             catch(InterruptedException ex){
 
