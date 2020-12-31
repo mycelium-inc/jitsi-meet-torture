@@ -273,6 +273,7 @@ public class JitsiMeetUrl
     {
 
         if(CustomCache._isPartyCreated == true){
+            System.out.println("party already exists");
             this.setRoomName(CustomCache._roomName);
             if(this.serverUrl == null){
                 this.setServerUrl(CustomCache._serverUrl);
@@ -291,17 +292,19 @@ public class JitsiMeetUrl
             });
 
         System.out.println(this.backendUrl);
-        URL obj = new URL(this.backendUrl + "/api/party/instant");
+        URL obj = new URL(this.backendUrl + "/api/bot-army/start");
 		HttpURLConnection con = (HttpURLConnection)obj.openConnection();
 		con.setRequestMethod("POST");
 		con.setRequestProperty("User-Agent", "Mozilla/5.0");
+		con.setRequestProperty("Content-Type", "application/json");
 
 		// For POST only - START
-	    con.setDoOutput(true);
-		// OutputStream os = con.getOutputStream();
-		// os.write(POST_PARAMS.getBytes());
-		// os.flush();
-		// os.close();
+            String jsonInputString = "{\"partyName\":\"" + this.roomName + "\"}";
+            con.setDoOutput(true);
+            OutputStream os = con.getOutputStream();
+            os.write(jsonInputString.getBytes("utf-8"));
+            os.flush();
+            os.close();
 		// For POST only - END
 
 		int responseCode = con.getResponseCode();
@@ -319,9 +322,11 @@ public class JitsiMeetUrl
 			in.close();
 
 			// print result
-            System.out.println(response.toString());
-            String roomName = response.toString().substring(response.toString().indexOf("partyName\":\"") + 12).split("\"")[0];
-            this.setRoomName(roomName);
+            //System.out.println(response.toString());
+            //String roomName = response.toString().substring(response.toString().indexOf("partyName\":\"") + 12).split("\"")[0];
+            //this.setRoomName(roomName);
+            System.out.println("POST request worked");
+            System.out.println(this.roomName);
             CustomCache._roomName = this.roomName;
             CustomCache._isPartyCreated = true;
             CustomCache._serverUrl = this.serverUrl;

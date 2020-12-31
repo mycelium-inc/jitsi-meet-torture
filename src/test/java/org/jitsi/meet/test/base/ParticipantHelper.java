@@ -239,6 +239,10 @@ public abstract class ParticipantHelper<P extends Participant>
         String backendUrl = config.getProperty("jitsi-meet.instance.backend-url");
 
         url.setBackendUrl(backendUrl);
+
+        String partyName = config.getProperty("jitsi-meet.instance.party-name");
+
+        url.setRoomName(partyName);
         return url;
     }
 
