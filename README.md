@@ -1,6 +1,9 @@
 jitsi-meet-torture
 ==================
 
+# AWS 
+```/home/ubuntu/jitsi-meet-torture/testing.sh testparty https://dev.myceliuminc.net https://dev-api.myceliuminc.net MaxUsersTest 9600```
+
 # Running 
 To run tests against a Jitsi-Meet instance running on `https://meet.example.com use`:
 
