@@ -43,7 +43,7 @@ public class MaxUsersTest
     /**
      * Number of participants in the call.
      */
-    public static int MAX_USERS = 3;
+    public static int MAX_USERS = 1;
     
     /**
      * The property to change MAX_USERS variable.
@@ -62,7 +62,8 @@ public class MaxUsersTest
     {
         super.setupClass();
 
-        ensureTwoParticipants();
+        //ensureTwoParticipants();
+        ensureOneParticipant();
     }
 
     /**
