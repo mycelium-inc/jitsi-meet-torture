@@ -57,11 +57,11 @@ public class WebParticipant extends Participant<WebDriver>
             + "&config.disable1On1Mode=true"
             + "&config.analytics.disabled=true"
             + "&interfaceConfig.SHOW_CHROME_EXTENSION_BANNER=false"
-            + "&interfaceConfig.DISABLE_FOCUS_INDICATOR=true";
-            + "&config.startVideoMuted=20";
-            + "&config.startWithAudioMuted=false";
-            + "&config.startWithVideoMuted=false";
-            + "&config.startAudioMuted=20";
+            + "&interfaceConfig.DISABLE_FOCUS_INDICATOR=true"
+            + "&config.startVideoMuted=20"
+            + "&config.startWithAudioMuted=false"
+            + "&config.startWithVideoMuted=false"
+            + "&config.startAudioMuted=20"
             + "&config.channelLastN=-1";
 
 
