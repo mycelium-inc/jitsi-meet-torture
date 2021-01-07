@@ -58,6 +58,13 @@ public class WebParticipant extends Participant<WebDriver>
             + "&config.analytics.disabled=true"
             + "&interfaceConfig.SHOW_CHROME_EXTENSION_BANNER=false"
             + "&interfaceConfig.DISABLE_FOCUS_INDICATOR=true";
+            + "&config.startVideoMuted=20";
+            + "&config.startWithAudioMuted=false";
+            + "&config.startWithVideoMuted=false";
+            + "&config.startAudioMuted=20";
+            + "&config.channelLastN=-1";
+
+
 
     /**
      * The javascript code which returns {@code true} if we are joined in
